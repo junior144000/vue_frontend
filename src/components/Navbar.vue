@@ -9,7 +9,9 @@
       </button>
 
       <!-- 🧢 Brand Logo (center) -->
-      <h1 class="text-lg text-2xl md:text-4xl font-bold">Style&Fashion</h1>
+       <RouterLink :to="`/`">
+         <h1 class="text-lg text-2xl md:text-4xl font-bold">Style&Fashion</h1>
+       </RouterLink>
 
       <!-- 🔍 ❤️ 🛒 Icons (right) -->
       <div class="flex items-center gap-4 text-xl">

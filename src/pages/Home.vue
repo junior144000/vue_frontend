@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Navbar />
+    
     <Hero />
     <h2 class="text-center mt-16 text-xl font-bold">Welcome to Style&Fashion</h2>
     <CategoryMenu />

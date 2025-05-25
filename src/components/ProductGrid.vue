@@ -1,6 +1,7 @@
 <template>
   <div class="grid grid-cols-2 gap-2 px-2 py-4">
-    <div
+    <RouterLink :to="`/product/${product.id}`" v-for="(product, index) in products" :key="index">
+        <div
       v-for="(product, index) in products"
       :key="index"
       class="bg-white p-2 rounded-lg shadow-sm relative"
@@ -31,11 +32,13 @@
           ></i>
         </button>
       </div>
-    </div>
+        </div>
+    </RouterLink>
   </div>
 </template>
 
 <script setup>
+import { RouterLink } from 'vue-router'
 import { reactive } from 'vue'
 
 // 🛍️ Product list with wishlist state
