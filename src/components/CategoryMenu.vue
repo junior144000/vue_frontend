@@ -7,7 +7,7 @@
       @click="selectCategory(cat)"
       :class="[
         'inline-block px-4 py-2 mx-1 rounded-full border text-sm font-medium transition',
-        selected === cat ? 'bg-cyan-700 text-white' : 'bg-gray-100 text-gray-700'
+        selected === cat ? 'bg-cyan-600 text-white' : 'bg-gray-100 text-gray-700'
       ]"
     >
       {{ cat }}
