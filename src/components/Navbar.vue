@@ -9,7 +9,7 @@
       </button>
 
       <!-- 🧢 Brand Logo (center) -->
-      <h1 class="text-lg text-2xl md:text-6xl font-bold">Style&Fashion</h1>
+      <h1 class="text-lg text-2xl md:text-4xl font-bold">Style&Fashion</h1>
 
       <!-- 🔍 ❤️ 🛒 Icons (right) -->
       <div class="flex items-center gap-4 text-xl">
