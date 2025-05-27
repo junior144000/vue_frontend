@@ -2,7 +2,8 @@
   <div>
 
     <Hero />
-    <h2 class="text-center mt-16 text-xl font-bold">Welcome to Style&Fashion</h2>
+    <h2 class="text-center mt-2 text-xl font-bold">Welcome to Style&Fashion</h2>
+    <p class="text-center text-gray-600 mb-4">Discover the latest trends and styles</p>
     <CategoryMenu />
     <SearchBar />
     <ProductGrid />

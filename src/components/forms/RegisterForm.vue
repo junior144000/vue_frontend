@@ -109,13 +109,20 @@ const router = useRouter()
 const handleRegister = async () => {
   error.value = null
 
+  // Basic front-end validation
+  if (!name.value || !email.value || !gender.value || !dob.value) {
+    error.value = 'Please fill out all fields.'
+    return
+  }
+
   if (password.value !== confirmPassword.value) {
-    error.value = "Passwords don't match"
+    error.value = "Passwords don't match."
     return
   }
 
   loading.value = true
   try {
+    // Replace URL with your Django backend registration endpoint
     const response = await axios.post('http://localhost:8000/api/auth/register/', {
       name: name.value,
       email: email.value,
@@ -124,11 +131,11 @@ const handleRegister = async () => {
       password: password.value
     })
 
-    // Optional: Store tokens if response includes them
+    // Optional: Save tokens if your backend sends them on registration
     // localStorage.setItem('accessToken', response.data.access)
     // localStorage.setItem('refreshToken', response.data.refresh)
 
-    // Redirect to login
+    // Redirect user to login page after successful registration
     router.push('/login')
   } catch (err) {
     error.value = err.response?.data?.detail || 'Registration failed.'

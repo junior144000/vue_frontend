@@ -4,7 +4,7 @@
     <div class="flex items-center justify-between px-4 py-3">
       
       <!-- ☰ Menu toggle (left) -->
-      <button @click="toggleMenu" class="text-xl">
+      <button @click="toggleMenu" class="text-xl text-cyan-700 md:hidden">
         <i class="fas fa-bars"></i>
       </button>
 
@@ -14,12 +14,16 @@
        </RouterLink>
 
       <!-- 🔍 ❤️ 🛒 Icons (right) -->
-      <div class="flex items-center gap-4 text-xl">
+      <div class= "flex items-center gap-4 text-xl text-cyan-700">
         <i class="fas fa-search"></i>
         <i class="fas fa-heart"></i>
         <div class="relative">
-          <i class="fas fa-shopping-cart"></i>
-          <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1">2</span>
+          <RouterLink :to="`/cart`">
+            <i class="fas fa-shopping-cart"></i>
+          </RouterLink>
+          <span v-if="cart.items.length > 0" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1">
+            {{ cart.items.length }}
+          </span>
         </div>
       </div>
     </div>
@@ -31,6 +35,9 @@
         <li class="py-2 border-b">Men</li>
         <li class="py-2 border-b">Kids</li>
         <li class="py-2 border-b">Sale</li>
+         <RouterLink :to="`/login`">
+            <li class="py-2 border-b">Login/Signup</li>
+         </RouterLink>
       </ul>
     </div>
   </header>
@@ -38,6 +45,10 @@
 
 <script setup>
 import { ref } from 'vue'
+import { RouterLink } from 'vue-router'
+import { useCartStore } from '../stores/cartStore'
+
+const cart = useCartStore()
 
 // Tracks if the menu is open (for mobile dropdown)
 const menuOpen = ref(false)

@@ -56,12 +56,10 @@
 </template>
 
 <script setup>
-// ✅ Composition API imports
 import { ref } from 'vue'
 import axios from 'axios'
 import { useRouter } from 'vue-router'
 
-// ✅ Form state
 const email = ref('')
 const password = ref('')
 const showPassword = ref(false)
@@ -70,23 +68,28 @@ const error = ref(null)
 
 const router = useRouter()
 
-// ✅ Submit login form
 const handleLogin = async () => {
-  loading.value = true
   error.value = null
 
+  // Basic front-end validation
+  if (!email.value || !password.value) {
+    error.value = 'Please enter both email and password.'
+    return
+  }
+
+  loading.value = true
   try {
-    // Replace this URL with your actual Django API endpoint
+    // Replace URL with your Django backend login endpoint
     const response = await axios.post('http://localhost:8000/api/auth/login/', {
       email: email.value,
       password: password.value
     })
 
-    // ✅ Store JWT token from Django
+    // Store JWT tokens in localStorage
     localStorage.setItem('accessToken', response.data.access)
     localStorage.setItem('refreshToken', response.data.refresh)
 
-    // ✅ Redirect to home after login
+    // Redirect to home page after login
     router.push('/')
   } catch (err) {
     error.value = err.response?.data?.detail || 'Login failed. Please try again.'

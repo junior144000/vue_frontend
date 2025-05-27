@@ -1,14 +1,16 @@
 
 
 <template>
-  <div class="bg-white p-2 rounded-lg shadow-sm relative">
+  <div v-if="product" class="bg-white p-2 rounded-lg shadow-sm relative">
      <RouterLink :to="`/product/${product.id}`">
         <!-- Product Image -->
-            <img
-                :src="product.image"
-                :alt="product.name"
-                class="w-full h-40 object-cover rounded-md"
-             />
+        <img
+        v-if="product.images.length > 0"
+        :src="`${product.images[0].image}`"
+        alt="Product image"
+        class="w-full h-40 object-cover rounded-md"
+        />
+
 
                     <!-- Product Name -->
             <h3 class="text-sm mt-2 font-medium line-clamp-2">
@@ -32,6 +34,8 @@
         </button>
       </div>
     </div>
+     <!-- Optional fallback if product is not ready -->
+  <div v-else class="p-2 text-sm text-gray-400">Loading product...</div>
 </template>
 
 
@@ -46,7 +50,19 @@
 </style>
 
 <script setup>
-defineProps({ product: Object, index: Number })
+    // ✅ Define props properly
+const props = defineProps({
+  product: {
+    type: Object,
+    required: true
+  },
+  index: {
+    type: Number,
+    required: true
+  }
+})
 
+// ✅ Destructure for clean access
+const { product, index } = props
 </script>
 

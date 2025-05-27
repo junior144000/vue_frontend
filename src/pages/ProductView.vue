@@ -52,7 +52,7 @@
     <div class="fixed bottom-0 left-0 right-0 bg-white border-t px-4 py-3">
       <button
         class="w-full py-3 text-white bg-red-500 rounded-full font-semibold text-sm"
-        @click="addToCart"
+        @click="cart.addToCart(product)"
       >
         Add to Cart
       </button>
@@ -64,6 +64,10 @@
 // Imports (Vue core + router)
 import { ref } from 'vue'
 import { useRoute } from 'vue-router'
+import { useCartStore } from '../stores/cartStore'
+
+// 🛒 Import cart store for managing cart state
+const cart = useCartStore()
 
 // 🧭 Grab route param to simulate product page per ID
 const route = useRoute()
@@ -73,7 +77,7 @@ const product = ref({
   id: route.params.id,
   name: 'Elegant Summer Dress',
   price: 32.99,
-  image: 'https://via.placeholder.com/600x600/FF3366/fff?text=Product',
+  image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIT3ulVQweFGkawcKVMTMrcuH59nvbVNXL5A&s',
   description:
     'Lightweight summer dress with floral prints. Perfect for casual wear or a summer party.',
   sizes: ['S', 'M', 'L', 'XL'],
@@ -89,12 +93,5 @@ const toggleWishlist = () => {
 }
 
 // ➕ Add to cart (mock for now)
-const addToCart = () => {
-  if (!selectedSize.value) {
-    alert('Please select a size before adding to cart.')
-    return
-  }
 
-  alert(`Added ${product.value.name} (Size: ${selectedSize.value}) to cart`)
-}
 </script>
