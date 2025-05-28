@@ -6,18 +6,23 @@
       <p>Your cart is empty.</p>
     </div>
 
-    <div v-else>
+    <div v-else-if ="cart.items">
       <div
         v-for="item in cart.items"
         :key="item.id"
         class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 mb-4 bg-white shadow rounded-lg"
       > 
-        <img
-          :src="item.image"
-          :alt="item.name"
+        <img v-if ="item.images.length > 0"
+        :src="item.images[0].image"
+        :alt="`${item.name} image`"
+        class="w-full h-80 object-cover"
+      />
+        <img v-else
+          src=""
+          alt="Placeholder image"
           class="w-24 h-24 object-cover rounded-lg mb-4 sm:mb-0"
         />
-        
+
         <div class="flex-1">
           <p class="text-lg font-semibold text-gray-700">{{ item.name }}</p>
           <p class="text-sm text-gray-500">${{ item.price }} × {{ item.quantity }}</p>
@@ -57,6 +62,6 @@
 import { ref, computed } from 'vue'
 import { useCartStore } from '../stores/cartStore'
 const cart = useCartStore()
-
-
+const subtotal = computed(() => cart.subtotal)
+console.log('🛒 Cart items:', cart.items)
 </script>
