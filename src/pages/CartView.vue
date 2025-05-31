@@ -12,7 +12,7 @@
         :key="item.id"
         class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 mb-4 bg-white shadow rounded-lg"
       > 
-        <img v-if ="item.images.length > 0"
+        <img v-if ="item.images && item.images.length > 0"
         :src="item.images[0].image"
         :alt="`${item.name} image`"
         class="w-full h-80 object-cover"
@@ -48,6 +48,12 @@
           >Remove</button>
         </div>
       </div>
+      <button
+      @click="goToCheckout"
+      class="bg-red-500 text-white px-6 py-2 rounded hover:bg-red-600 transition"
+    >
+      Checkout
+    </button>
 
       <p class="text-right mt-6 text-xl font-bold text-gray-800">
         Subtotal: ${{ cart.subtotal.toFixed(2) }}
@@ -61,7 +67,14 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useCartStore } from '../stores/cartStore'
+import { useRouter } from 'vue-router'
+
 const cart = useCartStore()
 const subtotal = computed(() => cart.subtotal)
+const router = useRouter()
+
+const goToCheckout = () => {
+  router.push('/checkout')
+}
 console.log('🛒 Cart items:', cart.items)
 </script>

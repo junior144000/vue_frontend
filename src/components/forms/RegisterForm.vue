@@ -1,32 +1,18 @@
 <template>
   <div class="w-full max-w-sm mx-auto">
     <h1 class="text-xl font-semibold mb-6 text-center">Create an Account</h1>
-
-    <!-- Error display -->
     <p v-if="error" class="text-red-500 text-sm mb-4 text-center">{{ error }}</p>
 
     <!-- Full Name -->
     <div class="mb-4">
       <label class="block text-sm font-medium mb-1" for="name">Full Name</label>
-      <input
-        v-model="name"
-        id="name"
-        type="text"
-        placeholder="John Doe"
-        class="w-full border rounded px-3 py-2"
-      />
+      <input v-model="name" id="name" type="text" placeholder="John Doe" class="w-full border rounded px-3 py-2" />
     </div>
 
     <!-- Email -->
     <div class="mb-4">
       <label class="block text-sm font-medium mb-1" for="email">Email</label>
-      <input
-        v-model="email"
-        id="email"
-        type="email"
-        placeholder="john@example.com"
-        class="w-full border rounded px-3 py-2"
-      />
+      <input v-model="email" id="email" type="email" placeholder="john@example.com" class="w-full border rounded px-3 py-2" />
     </div>
 
     <!-- Gender -->
@@ -34,43 +20,28 @@
       <label class="block text-sm font-medium mb-1" for="gender">Gender</label>
       <select v-model="gender" id="gender" class="w-full border rounded px-3 py-2">
         <option disabled value="">Select gender</option>
-        <option>Male</option>
-        <option>Female</option>
-        <option>Other</option>
+        <option value="M">Male</option>
+        <option value="F">Female</option>
+        <option value="O">Other</option>
       </select>
     </div>
 
     <!-- Date of Birth -->
     <div class="mb-4">
       <label class="block text-sm font-medium mb-1" for="dob">Date of Birth</label>
-      <input
-        v-model="dob"
-        id="dob"
-        type="date"
-        class="w-full border rounded px-3 py-2"
-      />
+      <input v-model="dob" id="dob" type="date" class="w-full border rounded px-3 py-2" />
     </div>
 
     <!-- Password -->
     <div class="mb-4">
       <label class="block text-sm font-medium mb-1" for="password">Password</label>
-      <input
-        v-model="password"
-        id="password"
-        type="password"
-        class="w-full border rounded px-3 py-2"
-      />
+      <input v-model="password" id="password" type="password" class="w-full border rounded px-3 py-2" />
     </div>
 
     <!-- Confirm Password -->
     <div class="mb-4">
       <label class="block text-sm font-medium mb-1" for="confirmPassword">Confirm Password</label>
-      <input
-        v-model="confirmPassword"
-        id="confirmPassword"
-        type="password"
-        class="w-full border rounded px-3 py-2"
-      />
+      <input v-model="confirmPassword" id="confirmPassword" type="password" class="w-full border rounded px-3 py-2" />
     </div>
 
     <!-- Register Button -->
@@ -92,8 +63,10 @@
 
 <script setup>
 import { ref } from 'vue'
-import axios from 'axios'
 import { useRouter } from 'vue-router'
+import { registerUser } from '../../services/api'
+
+const router = useRouter()
 
 const name = ref('')
 const email = ref('')
@@ -104,12 +77,11 @@ const confirmPassword = ref('')
 const error = ref(null)
 const loading = ref(false)
 
-const router = useRouter()
-
+// Handles user registration
 const handleRegister = async () => {
   error.value = null
 
-  // Basic front-end validation
+  // Basic form validation
   if (!name.value || !email.value || !gender.value || !dob.value) {
     error.value = 'Please fill out all fields.'
     return
@@ -121,21 +93,17 @@ const handleRegister = async () => {
   }
 
   loading.value = true
+
   try {
-    // Replace URL with your Django backend registration endpoint
-    const response = await axios.post('http://localhost:8000/api/auth/register/', {
-      name: name.value,
+    const response = await registerUser({
+      full_name: name.value,
       email: email.value,
       gender: gender.value,
       date_of_birth: dob.value,
       password: password.value
     })
 
-    // Optional: Save tokens if your backend sends them on registration
-    // localStorage.setItem('accessToken', response.data.access)
-    // localStorage.setItem('refreshToken', response.data.refresh)
-
-    // Redirect user to login page after successful registration
+    // Redirect to login after success
     router.push('/login')
   } catch (err) {
     error.value = err.response?.data?.detail || 'Registration failed.'

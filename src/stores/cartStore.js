@@ -14,6 +14,19 @@ export const useCartStore = defineStore('cart', {
       }
       this.saveCart()
     },
+    increaseQty(id) {
+      const item = this.items.find((i) => i.id === id)
+      if (item) item.quantity += 1
+    },
+
+    decreaseQty(id) {
+      const item = this.items.find((i) => i.id === id)
+      if (item && item.quantity > 1) {
+        item.quantity -= 1
+      } else {
+        prompt('Cart item quantity cannot be less than 1.')
+      }
+    },
     removeFromCart(id) {
       this.items = this.items.filter(item => item.id !== id)
       this.saveCart()

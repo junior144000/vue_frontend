@@ -9,6 +9,11 @@ import { createPinia } from 'pinia'
 const app = createApp(App)
 const pinia = createPinia()
 app.use(pinia) // 👈 use Pinia for state management
+
+import { useAuthStore } from './stores/authStore'
+const authStore = useAuthStore()
+authStore.initialize() // 🔑 load token from localStorage
+
 app.use(router) // 👈 use the router
 app.mount('#app')
 

@@ -38,6 +38,9 @@
          <RouterLink :to="`/login`">
             <li class="py-2 border-b">Login/Signup</li>
          </RouterLink>
+         <button v-if="authStore.isAuthenticated" 
+         @click="authStore.logout" class="text-sm text-red-500">Logout
+        </button>
       </ul>
     </div>
   </header>
@@ -47,8 +50,11 @@
 import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useCartStore } from '../stores/cartStore'
+import { useAuthStore } from '../stores/authStore'
 
 const cart = useCartStore()
+
+const authStore = useAuthStore()
 
 // Tracks if the menu is open (for mobile dropdown)
 const menuOpen = ref(false)
