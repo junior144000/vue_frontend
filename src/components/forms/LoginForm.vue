@@ -29,6 +29,13 @@
       />
     </div>
 
+     <!-- 👉 Forgot Password link -->
+      <div class="text-right mt-2">
+        <router-link to="/request-reset" class="text-sm text-blue-600 hover:underline">
+          Forgot password?
+        </router-link>
+      </div>
+
     <!-- Login Button -->
     <button
       @click="handleLogin"

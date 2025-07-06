@@ -10,7 +10,7 @@
 
       <!-- 🧢 Brand Logo (center) -->
        <RouterLink :to="`/`">
-         <h1 class="text-lg text-2xl md:text-4xl font-bold">Style&Fashion</h1>
+         <h1 class="text-lg text-9xl md:text-4xl font-bold">Selosia</h1>
        </RouterLink>
 
       <!-- 🔍 ❤️ 🛒 Icons (right) -->
@@ -31,10 +31,15 @@
     <!-- Dropdown menu -->
     <div v-if="menuOpen" class="bg-white border-t">
       <ul class="flex flex-col text-center">
+        <li class="py-2 border-b">Install App
+          <PWAInstallButton />
+        </li>
         <li class="py-2 border-b">Women</li>
         <li class="py-2 border-b">Men</li>
         <li class="py-2 border-b">Kids</li>
         <li class="py-2 border-b">Sale</li>
+        <li><RouterLink to="/address" class="text-sm text-gray-600 hover:underline">📍 Delivery Address</RouterLink>
+        </li>
          <RouterLink :to="`/login`">
             <li class="py-2 border-b">Login/Signup</li>
          </RouterLink>
@@ -51,6 +56,7 @@ import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useCartStore } from '../stores/cartStore'
 import { useAuthStore } from '../stores/authStore'
+import PWAInstallButton from './PWAInstallButton.vue'
 
 const cart = useCartStore()
 

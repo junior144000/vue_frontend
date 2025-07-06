@@ -44,6 +44,18 @@
       <input v-model="confirmPassword" id="confirmPassword" type="password" class="w-full border rounded px-3 py-2" />
     </div>
 
+    <!-- Terms Checkbox -->
+<div class="mb-4 flex items-start gap-2 text-sm">
+  <input type="checkbox" id="agree" v-model="agreed" class="mt-1" />
+  <label for="agree">
+    I agree to the
+    <a href="/terms" class="text-red-500 underline">Terms of Service</a>
+    and
+    <a href="/privacy" class="text-red-500 underline">Privacy Policy</a>.
+  </label>
+</div>
+
+
     <!-- Register Button -->
     <button
       @click="handleRegister"
@@ -76,6 +88,8 @@ const password = ref('')
 const confirmPassword = ref('')
 const error = ref(null)
 const loading = ref(false)
+const agreed = ref(false)
+
 
 // Handles user registration
 const handleRegister = async () => {
@@ -91,6 +105,12 @@ const handleRegister = async () => {
     error.value = "Passwords don't match."
     return
   }
+
+  if (!agreed.value) {
+  error.value = 'You must agree to the terms and privacy policy.'
+  return
+}
+
 
   loading.value = true
 

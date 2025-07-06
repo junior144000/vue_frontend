@@ -7,7 +7,9 @@ import LoginView from '../pages/LoginView.vue'
 import RegisterView from '../pages/RegisterView.vue'
 import CheckOutView from '../pages/CheckOutView.vue'
 import { useAuthStore } from '../stores/authStore.js'
-
+import RequestResetView from '../pages/RequestResetView.vue'
+import ResetPasswordView from '../pages/ResetPasswordView.vue'
+import DeliveryAddressView from '../pages/DeliveryAddressView.vue' 
 
 
 const routes = [
@@ -15,15 +17,13 @@ const routes = [
     path: '/',
     component: DefaultLayout,
     children:[
-        {
-             path: '/', name: 'Home',component: Home
-        },
-       {
-             path: '/product/:id', name: 'ProductView', component: ProductView
-        },
-        {
-             path: '/cart', name: 'Cart',component: CartView
-        }
+        {path: '/', name: 'Home',component: Home},
+        {path: '/product/:id', name: 'ProductView', component: ProductView},
+        {path: '/cart', name: 'Cart',component: CartView},
+        {path: '/request-reset',name: 'RequestReset',component: RequestResetView},
+        {path: '/reset-password/:uid/:token',name: 'ResetPassword',component: ResetPasswordView},
+        {path: '/address', name: 'DeliveryAddress', component: DeliveryAddressView, meta: { requiresAuth: true } }
+        
     ]
   },
    { path: '/login', name: 'login', component: LoginView },

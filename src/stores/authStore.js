@@ -17,6 +17,9 @@ export const useAuthStore = defineStore('auth', {
       this.accessToken = response.data.access
       localStorage.setItem('accessToken', response.data.access)
 
+
+      
+
       // Optional: fetch user profile here if needed
     },
     logout() {
