@@ -10,6 +10,7 @@ import { useAuthStore } from '../stores/authStore.js'
 import RequestResetView from '../pages/RequestResetView.vue'
 import ResetPasswordView from '../pages/ResetPasswordView.vue'
 import DeliveryAddressView from '../pages/DeliveryAddressView.vue' 
+import SuccessView from '../pages/SuccessView.vue'
 
 
 const routes = [
@@ -22,8 +23,10 @@ const routes = [
         {path: '/cart', name: 'Cart',component: CartView},
         {path: '/request-reset',name: 'RequestReset',component: RequestResetView},
         {path: '/reset-password/:uid/:token',name: 'ResetPassword',component: ResetPasswordView},
-        {path: '/address', name: 'DeliveryAddress', component: DeliveryAddressView, meta: { requiresAuth: true } }
+        {path: '/address', name: 'DeliveryAddress', component: DeliveryAddressView, meta: { requiresAuth: true } },
+        {path: '/success',name: 'Success',component: SuccessView}
         
+
     ]
   },
    { path: '/login', name: 'login', component: LoginView },

@@ -21,7 +21,25 @@
 
       <!-- Price + Wishlist Button -->
       <div class="flex justify-between items-center mt-1">
-        <p class="text-red-600 font-semibold text-sm">${{ product.price }}</p>
+
+        <!-- 💸 Price display -->
+        <div class="text-sm mt-1">
+          <span v-if="product.original_price && product.original_price > product.price" class="line-through text-gray-400 mr-2">
+            ${{ product.original_price }}
+          </span>
+          <span class="text-red-600 font-semibold">${{ product.price }}</span>
+        </div>
+
+            <!-- 🏷️ Tags -->
+        <div class="flex flex-wrap mt-2 gap-1">
+          <span
+            v-for="tag in product.tags"
+            :key="tag.id"
+            class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full"
+          >
+            {{ tag.name }}
+          </span>
+        </div>
 
         <!-- Wishlist Icon -->
         <button @click.stop="$emit('toggle-wishlist', index)">

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="mb-11">
     <!-- 🛍️ Product Grid -->
     <div class="grid grid-cols-2 gap-2 px-2 py-4">
       <ProductCard

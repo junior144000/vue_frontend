@@ -34,6 +34,7 @@
         <li class="py-2 border-b">Install App
           <PWAInstallButton />
         </li>
+        <li> Hi, {{ authStore.user?.full_name }}</li>
         <li class="py-2 border-b">Women</li>
         <li class="py-2 border-b">Men</li>
         <li class="py-2 border-b">Kids</li>
@@ -57,6 +58,7 @@ import { RouterLink } from 'vue-router'
 import { useCartStore } from '../stores/cartStore'
 import { useAuthStore } from '../stores/authStore'
 import PWAInstallButton from './PWAInstallButton.vue'
+
 
 const cart = useCartStore()
 
