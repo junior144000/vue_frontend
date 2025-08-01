@@ -14,7 +14,7 @@ export const useProductStore = defineStore('product', {
       this.loading = true
       this.error = null
       try {
-        const res = await api.get('/api/store/products/')
+        const res = await api.get('/store/products/')
         this.products = res.data
       } catch (err) {
         this.error = 'Failed to load products.'
